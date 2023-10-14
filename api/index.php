@@ -1,7 +1,21 @@
 <?php
+require 'vendor/autoload.php'; // Load Composer's autoloader
 
-require_once __DIR__ . '/../vendor/autoload.php';
+// Replace with your MongoDB Atlas connection string
+$connectionString = "mongodb+srv://kenUser:KenPassword@atlascluster.qrj9egp.mongodb.net/examples";
 
-Tracy\Debugger::enable(Tracy\Debugger::DEVELOPMENT);
+try {
+    $client = new MongoDB\Client($connectionString);
+    $collection = $client->examples->people;
 
-throw new RuntimeException('Hello Tarun!');
+    $data = [
+        "name" => "John Doe",
+        "email" => "john.doe@example.com",
+        "age" => 30,
+    ];
+
+    $insertResult = $collection->insertOne($data);
+    echo "Inserted document with ID: " . $insertResult->getInsertedId() . "\n";
+} catch (MongoDB\Driver\Exception\Exception $e) {
+    echo "Error: " . $e->getMessage() . "\n";
+}
