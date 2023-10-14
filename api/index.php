@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php'; // Load Composer's autoloader
+require '../vendor/autoload.php'; // Load Composer's autoloader
 
 // Replace with your MongoDB Atlas connection string
 $connectionString = "mongodb+srv://kenUser:KenPassword@atlascluster.qrj9egp.mongodb.net/examples";
